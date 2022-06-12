@@ -8,10 +8,8 @@ COPY . /app
 
 RUN mvn clean package
 
-RUN ls -a
+ARG JAR_FILE=target/*.jar
 
-ARG JAR_FILE=/app/target/*.jar
+COPY ${JAR_FILE} appz.jar
 
-COPY ${JAR_FILE} app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/appz.jar"]
