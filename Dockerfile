@@ -1,8 +1,12 @@
 FROM openjdk:8-jdk-alpine
 
-RUN ./mvnw clean install
+COPY src /home/app/src
 
-ARG JAR_FILE=target/*.jar
+COPY pom.xml /home/app
+
+RUN mvn -f /home/app/pom.xml clean package
+
+ARG JAR_FILE=home/app/target/*.jar
 
 COPY ${JAR_FILE} app.jar
 
