@@ -5,6 +5,6 @@ metadata:
   region: us-east-1
 managedNodeGroups:
   - name: final-node
-  instanceType: t3.micro
-  minSize: 2
-  maxSize: 3
+    instanceType: t3.micro
+    minSize: 2
+    maxSize: 3
