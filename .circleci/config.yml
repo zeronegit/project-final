@@ -84,5 +84,5 @@ workflows:
       # - test:
       #     requires: [lint]
       - push-image
-      - go-live
+      - go-live:
           requires: [push-image]
