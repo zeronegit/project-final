@@ -8,9 +8,7 @@ COPY . /app
 
 RUN mvn clean package
 
-RUN cd /target
-
-RUN ls -a
+RUN ls -d -l . target
 
 # ARG JAR_FILE=target/*.jar
 
