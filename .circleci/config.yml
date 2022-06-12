@@ -35,7 +35,7 @@ jobs:
   push-image:
     docker:
       - image: docker:17.05.0-ce-git
-      working_directory: ~/dock
+    working_directory: ~/dock
     steps:
       - checkout
       - setup_remote_docker
@@ -82,10 +82,9 @@ jobs:
 workflows:
   default:
     jobs:
-      - lint     
-      - test:
-          requires: [lint]
-      - push-image:
-          requires: [test]
+      # - lint     
+      # - test:
+      #     requires: [lint]
+      - push-image
       - go-live:
           requires: [push-image]
