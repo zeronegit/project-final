@@ -43,7 +43,7 @@ jobs:
           name: push docker image 
           command: |
             sudo chmod +x mvnw
-		        ./mvnw test
+            ./mvnw test
             docker build --tag=projectfinal .
             docker login --username ${D_U} --password ${D_P}
             docker tag projectfinal nguyendt9/projectfinal
