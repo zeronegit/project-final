@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-FROM maven:latest
+FROM csanchez/maven
 USER root
 COPY src /home/app/src
 
