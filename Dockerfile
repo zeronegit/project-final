@@ -1,4 +1,5 @@
 FROM openjdk:8-jdk-alpine
+FROM maven:latest
 USER root
 COPY src /home/app/src
 
@@ -10,7 +11,7 @@ WORKDIR /home/app/
 
 RUN ls -a
 
-RUN ./mvnw clean package
+RUN mvn clean package
 
 ARG JAR_FILE=/target/*.jar
 
