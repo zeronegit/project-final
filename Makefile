@@ -1,9 +1,10 @@
 build-lint-pom:
-		sudo ./mvnw clean install
+		sudo chmod +x mvnw
+		./mvnw clean install
 
 lint-docker: 
 		hadolint Dockerfile
 
 run-test:
-		sudo ./mvnw test
+		./mvnw test
 
