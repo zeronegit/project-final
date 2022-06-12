@@ -95,8 +95,8 @@ jobs:
             mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
             kubectl version --short --client
             #run
-            aws eks --region us-west-1 update-kubeconfig --name final-three
-            kubectl set image deployment/final-project finalproject=nguyendt9/projectfinal
+            aws eks --region us-west-2 update-kubeconfig --name final-three
+            kubectl set image deployment/projectfinal projectfinal=nguyendt9/projectfinal
             kubectl rollout status deployment/projectfinal
             kubectl get deployments
 
