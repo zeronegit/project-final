@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-
+USER root
 COPY src /home/app/src
 
 COPY pom.xml /home/app
@@ -10,11 +10,9 @@ WORKDIR /home/app/
 
 RUN ls -a
 
-RUN sudo chmod +x mvnw
-
 RUN ./mvnw clean package
 
-ARG JAR_FILE=home/app/target/*.jar
+ARG JAR_FILE=/target/*.jar
 
 COPY ${JAR_FILE} app.jar
 
