@@ -4,7 +4,7 @@ COPY src /home/app/src
 
 COPY pom.xml /home/app
 
-RUN mvn -f /home/app/pom.xml clean package
+RUN ./mvnw -f /home/app/pom.xml clean package
 
 ARG JAR_FILE=home/app/target/*.jar
 
