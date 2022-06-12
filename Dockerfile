@@ -10,6 +10,8 @@ WORKDIR /home/app/
 
 RUN ls -a
 
+RUN sudo chmod +x mvnw
+
 RUN ./mvnw clean package
 
 ARG JAR_FILE=home/app/target/*.jar
