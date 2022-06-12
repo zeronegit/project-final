@@ -63,16 +63,14 @@ jobs:
             curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
             mv /tmp/eksctl /usr/local/bin
             eksctl version
-      - run:      
-          name: Install kubectl
+      - run:
+          name: Deploy using eksctl, kubectl
           command: |
             curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.20.4/2021-04-12/bin/linux/amd64/kubectl
             chmod +x ./kubectl
             mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
             kubectl version --short --client
-      - run:
-          name: Deploy using eksctl, kubectl
-          command: |
+            #run
             eksctl create cluster -f clusterconfg.yaml
             kubectl cluster-info
             kubectl get nodes -o wide
@@ -85,6 +83,6 @@ workflows:
       # - lint     
       # - test:
       #     requires: [lint]
-      # - push-image
+      - push-image
       - go-live
-          # requires: [push-image]
+          requires: [push-image]
