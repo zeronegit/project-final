@@ -39,11 +39,10 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - attach_workspace:
-          at: ~/
       - run: 
           name: push docker image 
           command: |
+            make build-lint-pom
             docker build --tag=projectfinal .
             docker login --username ${D_U} --password ${D_P}
             docker tag projectfinal nguyendt9/projectfinal
