@@ -1,8 +1,8 @@
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
-  name: final-two
-  region: us-east-2
+  name: final-three
+  region: us-west-1
 managedNodeGroups:
   - name: final-node
     instanceType: t3.micro
