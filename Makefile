@@ -6,5 +6,6 @@ lint-docker:
 		hadolint Dockerfile
 
 run-test:
+		sudo chmod +x mvnw
 		./mvnw test
 

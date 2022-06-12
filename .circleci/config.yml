@@ -16,12 +16,17 @@ jobs:
           command: |
             make build-lint-pom
             make lint-docker
-
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/
   test:
     docker:
       - image: circleci/openjdk:8-jdk-stretch
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/
       - run:
           name: run spring boot test
           command: |
