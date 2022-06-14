@@ -12,6 +12,6 @@ In this project, you will apply the skills you have acquired in this course to m
 * Using blue/green deployment strategy.
 
 ### final product
-Load balancer link: http://a0955c3a267bb4a58925e025eb3e25cd-380491338.us-west-2.elb.amazonaws.com/
+Load balancer link: http://a423cf291e6f3454898323cbc59a9cc0-727015055.us-west-1.elb.amazonaws.com/
 
 All screenshots are placed in final-screenshots folder
