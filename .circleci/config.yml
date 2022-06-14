@@ -42,7 +42,10 @@ jobs:
       - run: 
           name: push docker image 
           command: |
-            echo "hello"
+            docker build --tag=projectfinal .
+            docker login --username ${D_U} --password ${D_P}
+            docker tag projectfinal nguyendt9/projectfinal
+            docker push nguyendt9/projectfinal
 
 
   go-live:
@@ -57,11 +60,23 @@ jobs:
       - run:
           name: Install eksctl
           command: |
-            echo "hello"
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            mv /tmp/eksctl /usr/local/bin
+            eksctl version
       - run:
           name: Deploy using eksctl, kubectl
           command: |
-            echo "hello"
+            curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.20.4/2021-04-12/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            kubectl version --short --client
+            #run
+            eksctl create cluster -f clusterconfg.yaml
+            kubectl cluster-info
+            kubectl get nodes -o wide
+            kubectl create deploy projectfinal --image=nguyendt9/projectfinal
+            kubectl expose deployment/projectfinal --type="LoadBalancer" --port 80
+            kubectl get services
 
   update:
     docker:
@@ -75,7 +90,15 @@ jobs:
       - run:
           name: update deploy
           command: |
-            echo "hello"
+            curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.20.4/2021-04-12/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            kubectl version --short --client
+            #run
+            aws eks --region us-west-1 update-kubeconfig --name final-three
+            kubectl set image deployment/projectfinal projectfinal=nguyendt9/projectfinal
+            kubectl rollout status deployment/projectfinal
+            kubectl get deployments
 
 workflows:
   default:
@@ -83,8 +106,9 @@ workflows:
       - lint     
       - test:
           requires: [lint]
-      - push-image
+      - push-image:
+          requires: [push-image]
       - go-live:
           requires: [push-image]
       - update:
-          requires: [go-live]    
+          requires: [go-live]
