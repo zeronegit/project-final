@@ -99,7 +99,6 @@ jobs:
             kubectl set image deployment/projectfinal projectfinal=nguyendt9/projectfinal
             kubectl rollout status deployment/projectfinal
             kubectl get deployments
-
 workflows:
   default:
     jobs:
