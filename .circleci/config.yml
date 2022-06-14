@@ -107,7 +107,7 @@ workflows:
       - test:
           requires: [lint]
       - push-image:
-          requires: [push-image]
+          requires: [test]
       - go-live:
           requires: [push-image]
       - update:
